@@ -10,7 +10,3 @@ output "execution_arn" {
   description = "The Execution ARN of the REST API."
 }
 
-output "tags" {
-  value       = module.labels.tags
-  description = "A mapping of tags to assign to the resource."
-}

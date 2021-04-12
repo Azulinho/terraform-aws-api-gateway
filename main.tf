@@ -1,26 +1,13 @@
 ## Managed By : CloudDrove
 ## Copyright @ CloudDrove. All Right Reserved.
 
-#Module      : label
-#Description : This terraform module is designed to generate consistent label names and tags
-#              for resources. You can use terraform-labels to implement a strict naming
-#              convention.
-module "labels" {
-  source = "git::https://github.com/clouddrove/terraform-labels.git?ref=tags/0.13.0"
-
-  name        = var.name
-  application = var.application
-  environment = var.environment
-  managedby   = var.managedby
-  label_order = var.label_order
-}
 
 # Module      : Api Gateway
 # Description : Terraform module to create Api Gateway resource on AWS for creatng api.
 resource "aws_api_gateway_rest_api" "default" {
   count = var.enabled ? 1 : 0
 
-  name                     = module.labels.id
+  name                     = var.name
   description              = var.description
   binary_media_types       = var.binary_media_types
   minimum_compression_size = var.minimum_compression_size

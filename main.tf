@@ -24,7 +24,7 @@ resource "aws_api_gateway_resource" "default" {
   count = length(var.path_parts) > 0 ? length(var.path_parts) : 0
 
   rest_api_id = aws_api_gateway_rest_api.default.*.id[0]
-  parent_id   = aws_api_gateway_rest_api.default.*.root_resource_id[0]
+  parent_id   = var.parent_id != "" ? var.parent_id : aws_api_gateway_rest_api.default.*.root_resource_id[0]
   path_part   = element(var.path_parts, count.index)
 }
 
